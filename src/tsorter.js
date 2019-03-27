@@ -211,6 +211,10 @@ var tsorter = (function()
                 table = document.getElementById(table);
             }
 
+            if( !table || table == null ){
+                return;
+            }
+            
             that.table = table;
             that.ths   = table.getElementsByTagName("th");
             that.tbody = table.tBodies[0];
