@@ -1,5 +1,5 @@
 /*!
- * tsorter 2.0.0 - Copyright 2015 Terrill Dent, http://terrill.ca
+ * tsorter 2.0.0 - Copyright 2019 Terrill Dent, http://terrill.ca
  * JavaScript HTML Table Sorter
  * Released under MIT license, http://terrill.ca/sorting/tsorter/LICENSE
  */
@@ -113,7 +113,10 @@ var tsorter = (function()
                     };
                 default: /* Plain Text */
                     return function(row){  
-                        return that.getCell(row).firstChild.nodeValue.toLowerCase();
+                        if (typeof(that.getCell(row)) != "undefined" && that.getCell(row).firstChild != null)
+                            return that.getCell(row).firstChild.nodeValue;
+                        else
+                            return '';
                     };
             }
         },
@@ -213,6 +216,10 @@ var tsorter = (function()
                 table = document.getElementById(table);
             }
 
+            if( !table || table == null ){
+                return;
+            }
+            
             that.table = table;
             that.ths   = table.getElementsByTagName("th");
             that.tbody = table.tBodies[0];
